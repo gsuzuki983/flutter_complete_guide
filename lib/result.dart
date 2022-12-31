@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
-  final int resultScore;
-  Result(this.resultScore);
+  // final int resultScore;
+  Result();
 
   String get resultPhrase {
     String resultText = 'resultScore';
