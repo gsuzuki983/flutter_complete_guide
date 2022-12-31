@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-
-import './quiz.dart';
-import './result.dart';
+import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _MyAppState();
   }
 }
 
 class _MyAppState extends State<MyApp> {
-  dynamic _questions = {
+  var _questionIndex = 0;
+  void _answerQuestion() {
+    _questionIndex = _questionIndex + 1;
+    print(_questionIndex);
+  }
+
+  var _questions = {
     {
       'questionText': 'What\'s the favorite color?',
       'answer': [
@@ -43,33 +47,26 @@ class _MyAppState extends State<MyApp> {
       ],
     },
   };
-  var _questionIndex = 0;
-  var _totalScore = 0;
-
-  void _answerQuestion() {
-    // _totalScore += score;
-
-    if (_questionIndex < _questions.length) {}
-    setState(() {
-      _questionIndex = _questionIndex + 1;
-    });
-    print(_questionIndex);
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('My First App'),
-          ),
-          body: _questionIndex < _questions.length
-              ? Quiz(
-                  answerQuestion: _answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: _questions,
-                )
-              : Result()),
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: Column(
+          children: [
+            Question(
+              _questions.elementAt(_questionIndex)['questionText'].toString(),
+            ),
+            ...(_questions.elementAt(_questionIndex)['answer'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
+          ],
+        ),
+      ),
     );
   }
 }
