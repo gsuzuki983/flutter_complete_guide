@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/result.dart';
+import './result.dart';
 import './quiz.dart';
 
 void main() => runApp(MyApp());
@@ -12,43 +12,45 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _questionIndex = 0;
+  final _questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': [
+        {'text': 'Black', 'score': 90},
+        {'text': 'White', 'score': 100},
+        {'text': 'Blue', 'score': 90},
+        {'text': 'Yellow', 'score': 100}
+      ]
+    },
+    {
+      'questionText': 'What\'s your favorite foods?',
+      'answers': [
+        {'text': 'Biriyani', 'score': 100},
+        {'text': 'Roti', 'score': 90},
+        {'text': 'Ramen', 'score': 100},
+        {'text': 'Osirikoo', 'score': 90}
+      ]
+    },
+    {
+      'questionText': 'What\'s your favorite anime?',
+      'answers': [
+        {'text': 'Naruto', 'score': 100},
+        {'text': 'One Piece', 'score': 90},
+        {'text': 'My hero academea', 'score': 70},
+        {'text': 'Hippo no makanauchi', 'score': 50}
+      ]
+    },
+  ];
 
-  void _answerQuestion() {
+  var _questionIndex = 0;
+  var _totalScore = 0;
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
-      _questionIndex = _questionIndex + 1;
+      _questionIndex++;
     });
   }
-
-  final _questions = {
-    {
-      'questionText': 'What\'s the favorite color?',
-      'answer': [
-        'Red',
-        'Green',
-        'Blue',
-        'Black',
-      ],
-    },
-    {
-      'questionText': 'What\'s the favorite animal?',
-      'answer': [
-        'Rabbit',
-        'Lion',
-        'Cat',
-        'Dog',
-      ],
-    },
-    {
-      'questionText': 'Who\'s your favorite instructor?',
-      'answer': [
-        'Max',
-        'Max',
-        'Max',
-        'Max',
-      ],
-    },
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(),
+            : Result(_totalScore),
       ),
     );
   }
