@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +20,7 @@ class _MyAppState extends State<MyApp> {
     print(_questionIndex);
   }
 
-  var _questions = {
+  final _questions = {
     {
       'questionText': 'What\'s the favorite color?',
       'answer': [
@@ -59,19 +58,10 @@ class _MyAppState extends State<MyApp> {
           title: Text('My First App'),
         ),
         body: _questionIndex < _questions.length
-            ? Column(
-                children: [
-                  Question(
-                    _questions
-                        .elementAt(_questionIndex)['questionText']
-                        .toString(),
-                  ),
-                  ...(_questions.elementAt(_questionIndex)['answer']
-                          as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  }).toList()
-                ],
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
               )
             : Center(
                 child: Text('You did it!'),
