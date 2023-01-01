@@ -8,12 +8,13 @@ class Result extends StatelessWidget {
   String get resultPhrase {
     var resultText;
     if (resultScore <= 100) {
-      resultText = "Good";
+      resultText = "Good: ";
     } else if (resultScore > 100 && resultScore <= 150) {
-      resultText = "Awesome";
+      resultText = "Awesome: ";
     } else {
-      resultText = "GAMBARE GAMBARE";
+      resultText = "Funtastic: ";
     }
+    resultText += resultScore.toString();
     return resultText;
   }
 
