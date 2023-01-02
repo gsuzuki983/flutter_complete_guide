@@ -32,9 +32,9 @@ class Result extends StatelessWidget {
           ElevatedButton(
             onPressed: resetHandler,
             child: Text(
-              'restarting Quiz!',
+              'クイズをやり直す',
               style: TextStyle(
-                color: Colors.blue,
+                color: Colors.white,
                 fontSize: 30,
               ),
             ),
